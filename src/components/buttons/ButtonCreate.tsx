@@ -1,8 +1,11 @@
 import './buttonCreate.css'
+import { Context } from '../../context/context'
+import { useContext } from 'react'
 
 const ButtonCreate = () => {
+  const {createNewRoom} = useContext(Context)
   return(
-    <button className="button__create">Create room</button>
+    <button className="button__create" onClick={() => createNewRoom()}>Create room</button>
   )
 }
 
