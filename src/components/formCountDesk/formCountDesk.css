@@ -1,0 +1,15 @@
+.desk{
+    display: inline-flex;
+    flex-direction: row-reverse;
+}
+.desk__item{
+    color: #dcdcdc;
+    font-size: 50px;
+    cursor: pointer;
+    transition: .2s;
+}
+.desk__item:hover,
+.desk__item:hover ~ .desk__item{
+    color: #989898;
+}
+
