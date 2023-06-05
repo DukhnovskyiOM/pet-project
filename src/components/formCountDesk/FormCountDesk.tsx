@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './formCountDesk.css'
 import Desk from './Desk';
+import DeskSet from './DeskSet';
 
 const FormCountDesk = () => {
     const numDesk = 9
@@ -8,7 +9,7 @@ const FormCountDesk = () => {
     const [nVDesk, setNVDesk] = useState(0)
     const [check, setCheck] = useState(false)
 
-    function onDesk (e){
+    function onDesk (e: number){
         setNVDesk(e)
         setNDesk(e)
         setCheck(true)
@@ -20,7 +21,7 @@ const FormCountDesk = () => {
 
     return (
         <div className="form_choice">
-            <h1>Choice number of tables</h1>
+            <h1>Step 1: Choice number of tables</h1>
             {check ? 
                 <div>Your choice of {nVDesk} desk</div> : 
                 <div className="desk">
@@ -34,7 +35,18 @@ const FormCountDesk = () => {
           }
           
           <button onClick={() => offDesk()}>Reset</button>
-          <button>Next step</button>
+
+          {check && <>
+          <h1>Step 2: Individual setting (number of seats)</h1>
+          <div className="desk__set">
+                        {[...Array(nVDesk)].map((n, i) =>
+                    <DeskSet
+                    key={i}
+                     />
+                    )}
+                </div>
+          </>
+          }
           
       </div>
     )

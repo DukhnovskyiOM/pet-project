@@ -23,12 +23,14 @@ function App() {
   return (
     <>
     <Context.Provider value={{openList, createNewRoom}}>
-    <div className='wrapper'>
+    <div>
       <ButtonOpen />
       <ButtonCreate />
     </div>
+    <div className='wrapper'>
     {listOpen && <RoomList />}
     {createRoom && <CreateRoom />}
+    </div>
     </Context.Provider>
     </>
   )

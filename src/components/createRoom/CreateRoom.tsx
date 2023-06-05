@@ -7,6 +7,7 @@ const CreateRoom: React.FC = () => {
 
   return (
     <div className="createRoom__container">
+      <h1>Create room</h1>
       <FormCountDesk />
     </div>
   )
