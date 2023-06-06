@@ -5,7 +5,7 @@ import './roomList.css'
 const RoomList: React.FC = () => {
 
   return (
-    <div className="roomtList__container">111
+    <div>111
     </div>
   )
 }

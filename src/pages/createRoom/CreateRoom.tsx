@@ -1,6 +1,6 @@
 import React from "react";
 import './createRoom.css'
-import FormCountDesk from "../formCountDesk/FormCountDesk";
+import FormCountDesk from "../../components/formCountDesk/FormCountDesk";
 
 const CreateRoom: React.FC = () => {
 

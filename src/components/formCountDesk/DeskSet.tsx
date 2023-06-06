@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './formCountDesk.css'
 
- const DeskSet = () => {
+    const DeskSet = ({createRoom, idx}) => {
     const [count, setCount] = useState(4)
 
     const changeSetInc = () => {
@@ -9,6 +9,7 @@ import './formCountDesk.css'
             setCount(0)
         } else {
             setCount(count - 1)
+            createRoom(count - 1, idx)
         }
         
       }
@@ -17,6 +18,7 @@ import './formCountDesk.css'
             setCount(9)
         } else {
            setCount(count + 1) 
+           createRoom(count + 1, idx)
         }
         
       }
