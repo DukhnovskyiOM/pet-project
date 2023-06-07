@@ -1,15 +1,10 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { reducer as deskReducer } from "./room/room.slice";
 
-const rootReducer = combineReducers({
-    deskReducer
+const redusers = combineReducers({
+    desk: deskReducer,
 })
 
-export const setupStore = () => {
-    return configureStore({
-        reducer: rootReducer
-    })
-} 
-
-export type RootState = ReturnType<typeof rootReducer>
-export type AppStore = ReturnType<typeof setupStore>
-export type AppDispatch = AppStore['dispatch']
+export const store = configureStore({
+    reducer: redusers,
+})
