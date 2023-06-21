@@ -1,5 +1,15 @@
 
 
+.desk__set__item{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    color: white;
+    background-color: #ff0099;
+    margin: 5px;
+    
+}
+
 .desk{
     display: inline-flex;
     flex-direction: row-reverse;
@@ -17,20 +27,13 @@
 
 
 .desk__set{
-    
-    display: inline-flex;
+    display:inline-flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    width: 70%;
 }
-.desk__set__item{
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    color: white;
-    background-color: #ff0099;
-    margin: 40px;
-    
-}
+
 .button__change{
     height: 100px;
     align-items: center;

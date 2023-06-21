@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './formCountDesk.css'
 import Desk from './Desk';
-import DeskSet from './DeskSet';
-import AddDesk from './AddDesk';
+import DeskSet from './OneDesk';
 import { useRoom } from '../../hooks/useRoom';
+import { v4 as uuid } from 'uuid';
 
 
 
@@ -42,7 +42,7 @@ const FormCountDesk = () => {
 //     }
 // console.log(arrDesk)
     return (
-        <div className="form_choice">
+        <div>
             <h1>Step 1: Choice number of tables</h1>
             {check ? 
                 <div>Your choice of {nVDesk} {room} desk <button onClick={() => offDesk()}>Reset</button></div>
@@ -73,43 +73,31 @@ const FormCountDesk = () => {
                     // idx={i+1}
                     // createRoom={createRoom}
                      />
-                    )} */}
+                    )} */}<div className="desk__set">   
                     <DeskSet
                     deskN={{
-                        id: 1,
+                        id: uuid(),
                         name: 1,
                     }}
                      />
                      <DeskSet
                     deskN={{
-                        id: 2,
+                        id: uuid(),
                         name: 2,
                     }}
                      />
                      <DeskSet
                     deskN={{
-                        id: 3,
+                        id: uuid(),
                         name: 3,
                     }}
                      />
-                    <AddDesk 
+                     <DeskSet
                     deskN={{
-                        id: 1,
-                        name: 1,
+                        id: uuid(),
+                        name: 4,
                     }}
-                     />
-                     <AddDesk 
-                    deskN={{
-                        id: 2,
-                        name: 2,
-                    }}
-                     />
-                     <AddDesk 
-                    deskN={{
-                        id: 3,
-                        name: 3,
-                    }}
-                     />
+                     /></div>
                 {/* </div> */}
           </>
           }
