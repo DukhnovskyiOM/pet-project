@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import './formCountDesk.css'
 import Desk from './Desk';
 import DeskSet from './OneDesk';
@@ -14,7 +14,7 @@ const FormCountDesk = () => {
     const [nDesk, setNDesk] = useState(numDesk)
     const [nVDesk, setNVDesk] = useState(0)
     const [check, setCheck] = useState(false)
-    // const [arrDesk, setArrDesk] = useState([])
+    const [nameRoom, setNameRoom] = useState('')
 
     function onDesk (e: number){
         setNVDesk(e)
@@ -27,23 +27,41 @@ const FormCountDesk = () => {
     }
 
 
-//     function createRoom(e, i){
+    const createRoomName = (e) => {
+        e.preventDefault()
+        const nameRoom = e.target[0].value
+        setNameRoom(nameRoom)
+    }
 
-//         // let i = i:{e}
-//         // let re = i
-//         //console.log(e)
-//         //console.log(i)
-//         if(arrDesk.includes(i)){
-//             setArrDesk(arrDesk)
-//         } else {
-//             setArrDesk([...arrDesk, i])
-//         }
-        
-//     }
-// console.log(arrDesk)
+    // const sendD = (e) => {
+    //     console.log(e)
+    // }
+
+    // const Greeting = memo(function Greeting() {
+
+    //     return (
+    //         <div className="desk__set">
+    //                     {[...Array(nVDesk)].map((n, i) =>
+    //                 <DeskSet
+    //                 key={uuid()}
+    //                 deskN={{
+    //                     nameRoom,
+    //                     id: i + 1,
+    //                 }}
+    //                  />
+    //                 )}
+    //             </div>
+    //     );
+    // });
+
     return (
         <div>
+            <form onSubmit={createRoomName}>
+                <input type='text' placeholder='Room name' required />
+                <button type="submit">Save</button>
+            </form>
             <h1>Step 1: Choice number of tables</h1>
+            
             {check ? 
                 <div>Your choice of {nVDesk} {room} desk <button onClick={() => offDesk()}>Reset</button></div>
                  : 
@@ -65,40 +83,44 @@ const FormCountDesk = () => {
           {/* <div className="desk__set">
                         {[...Array(nVDesk)].map((n, i) =>
                     <DeskSet
-                    key={i}
-                    desk={{
-                        id: 1,
-                        name: 1,
+                    key={uuid()}
+                    deskN={{
+                        nameRoom,
+                        id: i + 1,
                     }}
-                    // idx={i+1}
-                    // createRoom={createRoom}
                      />
-                    )} */}<div className="desk__set">   
+                    )}
+                </div> */}
+                {/* <Greeting /> */}
+                    <div className="desk__set">   
                     <DeskSet
                     deskN={{
-                        id: uuid(),
+                        nameRoom,
+                        id: 1,
                         name: 1,
                     }}
                      />
                      <DeskSet
                     deskN={{
-                        id: uuid(),
+                        nameRoom,
+                        id: 2,
                         name: 2,
                     }}
                      />
                      <DeskSet
                     deskN={{
-                        id: uuid(),
+                        nameRoom,
+                        id: 3,
                         name: 3,
                     }}
                      />
                      <DeskSet
                     deskN={{
-                        id: uuid(),
+                        nameRoom,
+                        id: 4,
                         name: 4,
                     }}
                      /></div>
-                {/* </div> */}
           </>
           }
           

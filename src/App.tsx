@@ -7,6 +7,8 @@ import { Context } from './context/context'
 import CreateRoom from './pages/createRoom/CreateRoom'
 import { Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/navigation/Navigation'
+import SettingRoom from './pages/settingRoom/settingRoom'
+import Room from './pages/room/Room'
 
 function App() {
 
@@ -31,6 +33,8 @@ function App() {
     <Routes>
       <Route path='/' element={<RoomList />} />
       <Route path='/create' element={<CreateRoom />} />
+      <Route path='/setting' element={<SettingRoom />} />
+      <Route path='/room' element={<Room />} />
     </Routes>
     {/* <Context.Provider value={{openList, createNewRoom}}>
     <div>

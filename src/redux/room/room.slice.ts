@@ -7,26 +7,17 @@ export const roomSlice = createSlice({
     initialState,
     reducers: {
         deskAdd: (state, {payload: desk}) => {
-            //console.log('tyt');
-            
-            // if(state.some(d => d.id === desk.id)) return
             state.push(desk)
-            //console.log(state[0])
-            //console.log('tyt1');
         },
-        deskDel: (state, {payload: id}) => {
-            //console.log(id)
+        deskDel: (state, {payload: desk}) => {
+            const indexRoom = state.findIndex(r => r.nameRoom === desk.nameRoom)
+            if(indexRoom){
+                const indexDesk = state.findIndex(r => r.idDesk === desk.id)
+                    if(indexDesk !== -1) {
+                        state.splice(indexDesk, 1)
+                    }
 
-            const index = state.findIndex(r => r.idDesk === id)
-                if(index !== -1) {
-                    state.splice(index, 1)
-                }
-            // const index = state.findIndex(d => d.id === desk.id)
-            // if(index !== -1){
-            //     state.splice(index, 1)
-            // }
-            // state.filter(d => d.id === desk.id)
-
+            }
         }
     }
 })
