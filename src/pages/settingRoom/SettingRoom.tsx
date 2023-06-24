@@ -1,23 +1,23 @@
 import React from "react";
-import styles from './settingRoom.module.scss'
+import styles from "./settingRoom.module.scss";
 import OneDesk from "../../components/formCountDesk/OneDesk";
+import { useAppSelector } from "../../hooks/useAppSelection";
 
 const SettingRoom: React.FC = () => {
-
+  const { rooms } = useAppSelector((state) => state.desk);
 
   return (
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
-      <span className={styles.title}>Setting room -name room-</span>
-            <div className={styles.desk__set}>   
-                <OneDesk />
-                <OneDesk />
-                <OneDesk />
-                <OneDesk />
-            </div>
+        <span className={styles.title}>{rooms?.name}</span>
+        <div className={styles.desk__set}>
+          {rooms?.desks.map((el, i) => (
+            <OneDesk data={el} key={i} />
+          ))}
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SettingRoom
+export default SettingRoom;
