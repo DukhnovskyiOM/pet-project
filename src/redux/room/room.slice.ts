@@ -2,44 +2,43 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IDesk, IRoomState } from "../../models/model";
 
 const initialState: IRoomState = {
-  rooms: null,
+  rooms: [],
 };
 
 export const roomSlice = createSlice({
   name: "room",
   initialState,
   reducers: {
-    deskAdd: (state, { payload }) => {
-      state.rooms = payload;
-    },
     createRoom: (state, { payload }) => {
-      console.log(payload, "payload");
-
-      state.rooms = {
+      
+      const room = {
         name: payload.name,
         desks: Array(payload.num)
           .fill({
             name: "",
+            roomName: payload.name,
             seats: 0,
             start: "09:00",
             end: "18:00",
           })
           .map((el, i) => ({ ...el, id: i + 1 })),
       };
+
+      console.log(state.rooms, "payload");
+      return {
+        ...state,
+        rooms: [...state.rooms, payload.name = room]
+
+    };
+
+      
     },
     editDesk: (state, { payload }: PayloadAction<IDesk>) => {
-      if (state.rooms) {
-        state.rooms = {
-          ...state.rooms,
-          desks: state.rooms.desks.map((desk) => {
-            if (desk.id === payload.id) {
-              return payload;
-            } else {
-              return desk;
-            }
-          }),
-        };
-      }
+      const index = state.rooms?.findIndex(e => e.name === payload.roomName)
+      console.log(state.rooms[index].desks);
+      state.rooms[index].desks[payload.id - 1 ] = payload
+
+      
     },
     // deskDel: (state, { payload: desk }) => {
     //   const indexRoom = state.findIndex((r) => r.nameRoom === desk.nameRoom);
@@ -52,6 +51,6 @@ export const roomSlice = createSlice({
     // },
   },
 });
-export const { deskAdd, createRoom, editDesk } = roomSlice.actions;
+export const { createRoom, editDesk } = roomSlice.actions;
 
 export const { reducer } = roomSlice;

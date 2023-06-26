@@ -17,7 +17,10 @@ interface props {
 
 const OneDesk = ({ data }: props) => {
   const dispatch = useDispatch();
-  console.log(data, "data");
+//console.log(data, "data");
+
+ const { rooms } = useAppSelector((state) => state.place);
+ console.log(rooms);
 
   const addDesk = (e: any) => {
     e.preventDefault();
@@ -26,11 +29,12 @@ const OneDesk = ({ data }: props) => {
     const numberSeats = e.target[1].value;
     const startTime = e.target[2].value;
     const endTime = e.target[3].value;
-
+    console.log(rooms);
     dispatch(
       editDesk({
         id: data.id,
         name: nameDesk,
+        roomName: data.roomName,
         seats: numberSeats,
         start: startTime,
         end: endTime,

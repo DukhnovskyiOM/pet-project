@@ -2,9 +2,11 @@ import React from "react";
 import styles from "./roomList.module.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../hooks/useAppSelection";
 
 const RoomList: React.FC = () => {
   const navigate = useNavigate();
+  const { desk } = useAppSelector((state) => state);
   // const roomInfo = useSelector(state => state.desk);
   // console.log(roomInfo)
   // let arr = []
@@ -15,6 +17,7 @@ const RoomList: React.FC = () => {
   // let uniqueNames = new Set(arr);
   // let r = Array.from(uniqueNames).sort((a,b) => a -b)
   // let res = r.map(e => <li>{e}</li>)
+console.log(desk);
 
   const rooms = [
     {

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 export const useRoom = () => {
-    const {desk} = useSelector(state => state)
+    const {place} = useSelector(state => state)
 
-    return {desk}
+    return {place}
 }

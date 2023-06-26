@@ -4,12 +4,13 @@ export interface IRooms {
 }
 
 export interface IRoomState {
-  rooms: IRooms | null;
+  rooms: [] | null;
 }
 
 export interface IDesk {
   id: number;
   name: string;
+  roomName: string;
   seats: number;
   start: string;
   end: string;

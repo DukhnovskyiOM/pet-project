@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createRoom } from "../../redux/room/room.slice";
 // import FormCountDesk from "../../components/formCountDesk/FormCountDesk";
+import { v4 as uuid } from 'uuid';
 
 const CreateRoom: React.FC = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const CreateRoom: React.FC = () => {
         <span className={styles.title}>Create room</span>
         {!nameRoom ? (
           <>
-            <div className={styles.list}>Create room name</div>
+            <div className={styles.list}>name</div>
             <form onSubmit={createRoomName}>
               <input name="room" type="text" placeholder="Room-1" required />
               <button type="submit">Save</button>
