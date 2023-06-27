@@ -1,5 +1,5 @@
 import React from "react";
-import "./formCountDesk.css";
+//import "./formCountDesk.css";
 import "./oneDesk.scss";
 import IconWorkPlace from "../../img/Work-Icon.png";
 import BtnDelete from "../../img/btn-delete.png";
@@ -7,7 +7,7 @@ import AddDesk from "../../img/add-desk.png";
 import { IDesk } from "../../models/model";
 //import { v4 as uuid } from 'uuid';
 import { useDispatch } from "react-redux";
-import { editDesk } from "../../redux/room/room.slice";
+import { deleteDesk, editDesk } from "../../redux/room/room.slice";
 import { useAppSelector } from "../../hooks/useAppSelection";
 // import {actions} from '../../redux/room/room.slice'
 
@@ -17,6 +17,7 @@ interface props {
 
 const OneDesk = ({ data }: props) => {
   const dispatch = useDispatch();
+  const [save, setSave] = React.useState(false)
 //console.log(data, "data");
 
  const { rooms } = useAppSelector((state) => state.place);
@@ -24,12 +25,22 @@ const OneDesk = ({ data }: props) => {
 
   const addDesk = (e: any) => {
     e.preventDefault();
+    
     //     const idDesk = deskN.id
     const nameDesk = e.target[0].value;
     const numberSeats = e.target[1].value;
     const startTime = e.target[2].value;
     const endTime = e.target[3].value;
-    console.log(rooms);
+
+    const arrTime = new Array((endTime.slice(0,2) - startTime.slice(0,2)) * 60 / 15).fill('15')
+    console.log(arrTime);
+
+    //console.log(rooms);
+    if(startTime.slice(0,2) > endTime.slice(0,2)){
+      alert('start time mast be earle then end time')
+      return
+    }
+    
     dispatch(
       editDesk({
         id: data.id,
@@ -38,8 +49,10 @@ const OneDesk = ({ data }: props) => {
         seats: numberSeats,
         start: startTime,
         end: endTime,
+        arrTime: arrTime,
       })
     );
+    setSave(true)
     //     console.log(idDesk);
     //     const nameRoom =deskN.nameRoom
 
@@ -48,9 +61,12 @@ const OneDesk = ({ data }: props) => {
 
   const delDesk = (e: any) => {
     //     console.log(e);
-    //     const id = deskN.id
-    //     const nameRoom =deskN.nameRoom
+         const idDesk = data.id
+         const roomName = data.roomName
     //     dispatch(actions.deskDel({nameRoom, id}))
+    console.log(roomName, idDesk)
+    dispatch(deleteDesk({roomName, idDesk}))
+    setSave(false)
   };
 
   return (
@@ -59,7 +75,7 @@ const OneDesk = ({ data }: props) => {
         <img width={100} height={100} src={IconWorkPlace} alt="Workplace" />
       </div>
       <div className="wrap__right">
-        {!data.name ? (
+        {!save ? (
           <form onSubmit={addDesk}>
             <input
               defaultValue={data?.name}
@@ -80,9 +96,9 @@ const OneDesk = ({ data }: props) => {
             />
             <span>
               Start:
-              <input defaultValue={data?.start} type="time" />
+              <input list="time-list" defaultValue={data?.start} type="time" step="3600" min="06:00" max="22:00"/>
               End:
-              <input defaultValue={data?.end} type="time" />
+              <input defaultValue={data?.end} type="time" step="3600" min="07:00" max="23:00" />
             </span>
             <button type="submit">Save</button>
           </form>

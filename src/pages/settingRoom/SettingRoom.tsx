@@ -2,14 +2,25 @@ import React from "react";
 import styles from "./settingRoom.module.scss";
 import OneDesk from "../../components/formCountDesk/OneDesk";
 import { useAppSelector } from "../../hooks/useAppSelection";
+import { useDispatch } from "react-redux";
+import { addNewDesk } from "../../redux/room/room.slice";
 
 const SettingRoom: React.FC = () => {
   const { rooms } = useAppSelector((state) => state.place);
+  const dispatch = useDispatch();
+  const addDesk = (roomName) => {
+    const idd = rooms.at(-1)?.desks.filter(e=> e.id)
+    console.log(rooms[0] + 'tyt');
+    
+    dispatch(addNewDesk({roomName, id}))
+  }
+
 console.log(rooms);
   return (
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
         <span className={styles.title}>{rooms.at(-1)?.name}</span>
+        <button onClick={() => addDesk(rooms.at(-1)?.name)}>Add new desk</button>
         <div className={styles.desk__set}>
           {rooms.at(-1)?.desks.map((el, i) => (
             <OneDesk data={el} key={i} />
