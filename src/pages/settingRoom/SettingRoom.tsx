@@ -4,14 +4,13 @@ import OneDesk from "../../components/formCountDesk/OneDesk";
 import { useAppSelector } from "../../hooks/useAppSelection";
 import { useDispatch } from "react-redux";
 import { addNewDesk } from "../../redux/room/room.slice";
+import { v4 as uuid } from 'uuid';
 
 const SettingRoom: React.FC = () => {
   const { rooms } = useAppSelector((state) => state.place);
   const dispatch = useDispatch();
   const addDesk = (roomName) => {
-    const idd = rooms.at(-1)?.desks.filter(e=> e.id)
-    console.log(rooms[0] + 'tyt');
-    
+    const id = uuid()
     dispatch(addNewDesk({roomName, id}))
   }
 
