@@ -68,30 +68,17 @@ export const roomSlice = createSlice({
     },
     reserveDeskToRoom: (state, { payload }) => {
       console.log(payload);
-      const indexRoom = state.rooms?.findIndex(e => e.name === payload.dataDesk.roomName)
-      const indexDesk = state.rooms[indexRoom]?.desks.findIndex(e => e.id === payload.dataDesk.id)
-      const indexTime = state.rooms[indexRoom].desks[indexDesk].arrTime[payload.dataCutArr.num3]
-      // const index = state.rooms?.findIndex(e => e.name === payload.roomName)
-      console.log(indexTime);
-      
-      console.log(indexRoom);
-      console.log(indexDesk);
-      //const seats = (state.rooms[indexRoom].desks[indexDesk].seats) - payload.data.seats
-      const newSeats = indexTime - payload.data.seats
-      const newArrSeats = new Array(payload.dataCutArr.num6).fill(newSeats)
+      //const indexRoom = state.rooms?.findIndex(e => e.name === payload.dataDesk.roomName)
+      //const indexDesk = state.rooms[indexRoom]?.desks.findIndex(e => e.id === payload.dataDesk.id)
+
       const arrTime = [
-        ...state.rooms[indexRoom].desks[indexDesk].arrTime.slice(0, payload.dataCutArr.num3),
-        ...newArrSeats,
-        ...state.rooms[indexRoom].desks[indexDesk].arrTime.slice(payload.dataCutArr.num7)
+        ...state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime.slice(0, payload.startIdTime),
+        ...payload.newReserveArr,
+        ...state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime.slice(payload.endIdTime)
       ]
-      console.log(payload.dataDesk.seats);
-      console.log(payload.data.seats);
-      console.log(newSeats);
-      console.log(newArrSeats);
-      console.log(arrTime);
-      
-      //state.rooms[indexRoom].desks[indexDesk].seats = seats
-      state.rooms[indexRoom].desks[indexDesk].arrTime = arrTime
+console.log(arrTime);
+
+      state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime = arrTime
      },
   },
 });

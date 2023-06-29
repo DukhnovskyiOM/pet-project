@@ -43,3 +43,36 @@
     position:absolute;
     top: 60px;
 }
+
+.icon__time{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    
+    span{
+        padding: 10px;
+    }
+
+    .desk__item{    
+        color: #40f049;
+        font-size: 6px;
+        margin-top: 3px;
+        cursor: pointer;
+        &:hover{
+            color: #1e9424;
+        }
+      }
+    .desk__item_red{
+        color: #e7a036;
+        font-size: 6px;
+        margin-top: 3px;
+        cursor: pointer;
+        &:hover{
+            color: #c47c11;
+        }
+    }
+      
+}
