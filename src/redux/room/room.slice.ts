@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IDesk, IRoomState } from "../../models/model";
 import { v4 as uuid } from 'uuid';
+
 const initialState: IRoomState = {
   rooms: [],
 };
@@ -41,12 +42,13 @@ export const roomSlice = createSlice({
       const index = state.rooms?.findIndex(e => e.name === payload.roomName)
       console.log(payload);
       const desk = {
-            name: "new desk",
+            name: "",
             id: payload.id,
             roomName: payload.roomName,
-            seats: "",
+            seats: null,
             start: "00:00",
             end: "00:00",
+            arrTime: []
       };
       state.rooms[index].desks = [...state.rooms[index].desks, desk]
 

@@ -14,27 +14,29 @@ interface props {
 
 const OneDesk = ({ data }: props) => {
   const dispatch = useDispatch();
-  const [save, setSave] = React.useState(false)
+  const [save, setSave] = React.useState(false);
 
- const { rooms } = useAppSelector((state) => state.place);
- console.log(rooms);
+  const { rooms } = useAppSelector((state) => state.place);
+  console.log(rooms);
 
   const addDesk = (e: any) => {
     e.preventDefault();
-    
+
     const nameDesk = e.target[0].value;
     const numberSeats = e.target[1].value;
     const startTime = e.target[2].value;
     const endTime = e.target[3].value;
 
-    const arrTime = new Array((endTime.slice(0,2) - startTime.slice(0,2)) * 60 / 15).fill(numberSeats)
+    const arrTime: number[] = new Array(
+      ((endTime.slice(0, 2) - startTime.slice(0, 2)) * 60) / 15
+    ).fill(Number(numberSeats));
     console.log(arrTime);
 
-    if(startTime.slice(0,2) > endTime.slice(0,2)){
-      alert('start time mast be earle then end time')
-      return
+    if (startTime.slice(0, 2) > endTime.slice(0, 2)) {
+      alert("start time mast be earle then end time");
+      return;
     }
-    
+
     dispatch(
       editDesk({
         id: data.id,
@@ -43,18 +45,18 @@ const OneDesk = ({ data }: props) => {
         seats: numberSeats,
         start: startTime,
         end: endTime,
-        arrTime: arrTime,
+        arrTime,
       })
     );
-    setSave(true)
+    setSave(true);
   };
 
   const delDesk = (e: any) => {
-         const idDesk = data.id
-         const roomName = data.roomName
-    console.log(roomName, idDesk)
-    dispatch(deleteDesk({roomName, idDesk}))
-    setSave(false)
+    const idDesk = data.id;
+    const roomName = data.roomName;
+    console.log(roomName, idDesk);
+    dispatch(deleteDesk({ roomName, idDesk }));
+    setSave(false);
   };
 
   return (
@@ -73,7 +75,6 @@ const OneDesk = ({ data }: props) => {
               required
             />
             <input
-              defaultValue={data?.seats}
               className="input"
               type="number"
               placeholder="Number of seats example: 4"
@@ -84,9 +85,21 @@ const OneDesk = ({ data }: props) => {
             />
             <span>
               Start:
-              <input defaultValue={data?.start} type="time" step="3600" min="06:00" max="22:00"/>
+              <input
+                defaultValue={data?.start}
+                type="time"
+                step="3600"
+                min="06:00"
+                max="22:00"
+              />
               End:
-              <input defaultValue={data?.end} type="time" step="3600" min="07:00" max="23:00" />
+              <input
+                defaultValue={data?.end}
+                type="time"
+                step="3600"
+                min="07:00"
+                max="23:00"
+              />
             </span>
             <button type="submit">Save</button>
           </form>
