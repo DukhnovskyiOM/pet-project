@@ -1,7 +1,7 @@
 import './navigation.css'
 import { Link } from 'react-router-dom'
 
-export function Navigation() {
+export function Navigation(): React.JSX.Element {
     return (
         <nav className="navigation__block">
                 <Link to="/" className='button__navigation'>List</Link>

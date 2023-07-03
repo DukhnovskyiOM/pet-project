@@ -1,4 +1,5 @@
 export interface IRooms {
+  id: number;
   name: string;
   desks: IDesk[];
 }

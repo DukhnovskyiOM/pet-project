@@ -14,11 +14,11 @@ const CreateRoom: React.FC = () => {
 
   function onDesk(num: number) {
     console.log(num, "num");
-    dispatch(createRoom({ name: nameRoom, num }));
+    dispatch(createRoom({ name: nameRoom, num, id: uuid() }));
     navigate("/setting");
   }
 
-  const createRoomName = (e: any) => {
+  const createRoomName = (e) => {
     e.preventDefault();
     setNameRoom(e.target.room.value);
   };

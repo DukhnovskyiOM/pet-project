@@ -13,6 +13,7 @@ export const roomSlice = createSlice({
     createRoom: (state, { payload }) => {
       
       const room = {
+        id: payload.id,
         name: payload.name,
         desks: Array(payload.num)
           .fill({
@@ -39,8 +40,9 @@ export const roomSlice = createSlice({
       
     },
     addNewDesk: (state, { payload }) => {
+      
       const index = state.rooms?.findIndex(e => e.name === payload.roomName)
-      console.log(payload);
+
       const desk = {
             name: "",
             id: payload.id,
@@ -70,8 +72,6 @@ export const roomSlice = createSlice({
     },
     reserveDeskToRoom: (state, { payload }) => {
       console.log(payload);
-      //const indexRoom = state.rooms?.findIndex(e => e.name === payload.dataDesk.roomName)
-      //const indexDesk = state.rooms[indexRoom]?.desks.findIndex(e => e.id === payload.dataDesk.id)
 
       const arrTime = [
         ...state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime.slice(0, payload.startIdTime),

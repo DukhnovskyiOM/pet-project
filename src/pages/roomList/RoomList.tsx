@@ -3,13 +3,9 @@ import styles from "./roomList.module.scss";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../hooks/useAppSelection";
 import { delRoom } from "../../redux/room/room.slice";
-import SettingOneRoom from "../settingRoom/SettingOneRoom";
-import Room from "../room/Room";
+import { Link } from "react-router-dom";
 
 const RoomList: React.FC = () => {
-  const [edit, setEdit] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [sendRoomName, setSendRoomName] = React.useState("");
   const dispatch = useDispatch();
   const { rooms } = useAppSelector((state) => state.place);
 
@@ -19,15 +15,7 @@ const RoomList: React.FC = () => {
     dispatch(delRoom({ roomName }));
   };
 
-  const editRoom = (roomName: string) => {
-    setEdit(true);
-    setSendRoomName(roomName);
-  };
 
-  const openRoom = (roomName: string) => {
-    setOpen(true);
-    setSendRoomName(roomName);
-  };
 
   const List = () => (
     <div className={styles.formContainer}>
@@ -38,9 +26,9 @@ const RoomList: React.FC = () => {
             <div key={i} className={styles.list}>
               {room.name}
               <div>
-                <button onClick={() => openRoom(room.name)}>Enter</button>
+                <Link key={room.id} to={`/room/${room.id}`}>Enter</Link>
                 <button onClick={() => deleteRoom(room.name)}>Delete</button>
-                <button onClick={() => editRoom(room.name)}>Edit</button>
+                <Link key={room.id} to={`/setting/${room.id}`}>Edit</Link>
               </div>
             </div>
           ))}
@@ -48,34 +36,7 @@ const RoomList: React.FC = () => {
     </div>
   );
 
-  return (
-    <>
-      {!open ? (
-        <>
-          {!edit ? (
-            <List />
-          ) : (
-            <>
-              <button
-                className={styles.btn_back}
-                onClick={() => setEdit(false)}
-              >
-                -back-
-              </button>
-              <SettingOneRoom name={sendRoomName} />
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          <button className={styles.btn_back} onClick={() => setOpen(false)}>
-            -back-
-          </button>
-          <Room name={sendRoomName} />
-        </>
-      )}
-    </>
-  );
+  return ( <List /> );
 };
 
 export default RoomList;

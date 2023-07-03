@@ -19,7 +19,7 @@ const OneDesk = ({ data }: props) => {
   const { rooms } = useAppSelector((state) => state.place);
   console.log(rooms);
 
-  const addDesk = (e: any) => {
+  const addDesk = (e) => {
     e.preventDefault();
 
     const nameDesk = e.target[0].value;
@@ -51,7 +51,7 @@ const OneDesk = ({ data }: props) => {
     setSave(true);
   };
 
-  const delDesk = (e: any) => {
+  const delDesk = (e) => {
     const idDesk = data.id;
     const roomName = data.roomName;
     console.log(roomName, idDesk);
@@ -62,10 +62,20 @@ const OneDesk = ({ data }: props) => {
   return (
     <div className="wrapper__desk">
       <div className="wrap__left">
-        <img width={100} height={100} src={IconWorkPlace} alt="Workplace" />
+        {!save ? 
+        <img width={100} height={100} src={IconWorkPlace} alt="Workplace" /> 
+        : 
+        <img width={100} height={100} src={AddDesk} alt="Workplace" />
+        }
+                {data?.seats && <img
+              className="btn_delete"
+              src={BtnDelete}
+              alt="DeleteDesk"
+              onClick={delDesk}
+            />}
       </div>
       <div className="wrap__right">
-        {!save ? (
+         
           <form onSubmit={addDesk}>
             <input
               defaultValue={data?.name}
@@ -75,6 +85,7 @@ const OneDesk = ({ data }: props) => {
               required
             />
             <input
+              defaultValue={data?.seats ? data?.seats : ''}
               className="input"
               type="number"
               placeholder="Number of seats example: 4"
@@ -103,20 +114,7 @@ const OneDesk = ({ data }: props) => {
             </span>
             <button type="submit">Save</button>
           </form>
-        ) : (
-          <>
-            <img
-              className="btn_delete"
-              src={BtnDelete}
-              alt="DeleteDesk"
-              onClick={delDesk}
-            />
-            <div className="add__desk">
-              <img width={80} height={80} src={AddDesk} alt="Workplace" />
-              <span>Desk add</span>
-            </div>
-          </>
-        )}
+
       </div>
     </div>
   );
