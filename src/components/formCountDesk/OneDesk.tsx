@@ -1,12 +1,13 @@
 import React from "react";
-import "./oneDesk.scss";
+import styles from "./oneDesk.module.scss";
 import IconWorkPlace from "../../img/Work-Icon.png";
-import BtnDelete from "../../img/btn-delete.png";
 import AddDesk from "../../img/add-desk.png";
 import { IDesk } from "../../models/model";
 import { useDispatch } from "react-redux";
 import { deleteDesk, editDesk } from "../../redux/room/room.slice";
-import { useAppSelector } from "../../hooks/useAppSelection";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 interface props {
   data: IDesk;
@@ -15,9 +16,6 @@ interface props {
 const OneDesk = ({ data }: props) => {
   const dispatch = useDispatch();
   const [save, setSave] = React.useState(false);
-
-  const { rooms } = useAppSelector((state) => state.place);
-  console.log(rooms);
 
   const addDesk = (e) => {
     e.preventDefault();
@@ -60,51 +58,58 @@ const OneDesk = ({ data }: props) => {
   };
 
   return (
-    <div className="wrapper__desk">
-      <div className="wrap__left">
+    <div className={styles.wrapperDesk}>
+      <div className={styles.wrap__left}>
         {!save ? 
-        <img width={100} height={100} src={IconWorkPlace} alt="Workplace" /> 
+        <img width={70} height={70} src={IconWorkPlace} alt="Workplace" /> 
         : 
-        <img width={100} height={100} src={AddDesk} alt="Workplace" />
+        <>
+        <img width={70} height={70} src={AddDesk} alt="Workplace" />
+        <FontAwesomeIcon className={styles.edit} icon={faPenToSquare} onClick={() => setSave(false)} />
+        </>
         }
-                {data?.seats && <img
-              className="btn_delete"
-              src={BtnDelete}
-              alt="DeleteDesk"
-              onClick={delDesk}
-            />}
+        {data?.seats && <FontAwesomeIcon className={styles.del} icon={faTrash} onClick={delDesk} />}
       </div>
-      <div className="wrap__right">
-         
+      <div className={styles.wrap__right}>
           <form onSubmit={addDesk}>
+          <span>
+              Name:
             <input
               defaultValue={data?.name}
-              className="input"
+              disabled={save && true}
               type="text"
-              placeholder="Name example: Desk-1"
+              placeholder=":: new-desk"
               required
             />
+            </span>
+            <span>
+              Seats:
             <input
               defaultValue={data?.seats ? data?.seats : ''}
-              className="input"
+              disabled={save && true}
               type="number"
-              placeholder="Number of seats example: 4"
+              placeholder=":: 4"
               step="1"
               min="0"
               max="100"
               required
             />
+            </span>
             <span>
               Start:
               <input
+               disabled={save && true}
                 defaultValue={data?.start}
                 type="time"
                 step="3600"
                 min="06:00"
                 max="22:00"
               />
+              </span>
+              <span>
               End:
               <input
+                disabled={save && true}
                 defaultValue={data?.end}
                 type="time"
                 step="3600"
@@ -112,7 +117,7 @@ const OneDesk = ({ data }: props) => {
                 max="23:00"
               />
             </span>
-            <button type="submit">Save</button>
+            <button type="submit" disabled={save && true} className={save ? styles.save : ''}>{!save ? "Save" : "added"}</button>
           </form>
 
       </div>

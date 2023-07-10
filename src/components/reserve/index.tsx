@@ -10,6 +10,7 @@ interface props {
   rooms: IRooms[];
   indexRoom: number;
   errReserve: boolean;
+  sendReserve: boolean;
 }
 
 const Reserve = ({
@@ -20,6 +21,7 @@ const Reserve = ({
   rooms,
   indexRoom,
   errReserve,
+  sendReserve,
 }: props) => {
   const [reserve, setReserve] = React.useState(false);
 
@@ -42,19 +44,21 @@ const Reserve = ({
   return (
     <>
       {!reserve && (
-        <div className={styles.list}>
-          <>
-            {desk.name}
-            <button onClick={() => reserveDesk(desk)}>reserve a table</button>
-            <div>{desk.seats}</div>
-          </>
+        <div className={styles.list} onClick={() => reserveDesk(desk)}>
+            {`Desk name: ${desk.name}`}
         </div>
       )}
       {reserve && dataDesk && (
-        <div>
-          <form className={styles.form} onSubmit={reserveOneDesk}>
-            {reserve && <>{desk.name}</>}
+        <div className={styles.boxForm}>
+            {reserve && <>
+              <span className={styles.name}>{`Desk name: ${desk.name}`}</span>
+              <span className={styles.err}>{errReserve && "change time or seats"}</span>
+              <span className={styles.send}>{sendReserve && "Congrats! you reserve desk"}</span>
+              </>}
+          <form onSubmit={reserveOneDesk}>
             {dataDesk?.seats && (
+              <span>
+              Seats:
               <input
                 type="number"
                 defaultValue={1}
@@ -62,7 +66,10 @@ const Reserve = ({
                 max={dataDesk?.seats}
                 required
               />
+              </span>
             )}
+            <span>
+              Start:
             <input
               defaultValue={dataDesk?.start}
               type="time"
@@ -71,18 +78,22 @@ const Reserve = ({
               max={dataDesk?.start.slice(0, 3)}
               required
             />
-            <input
-              defaultValue={dataDesk?.start.slice(0, 3) + "15"}
-              type="time"
-              step="900"
-              min={dataDesk?.start.slice(0, 3) + "15"}
-              max={dataDesk?.end}
-              required
-            />
-            <button type="submit">Save</button>
-            {reserve && <>{desk.seats}</>}
-            <span>{errReserve && "change time or seats"}</span>
+            </span>
+              <span>
+              End:
+              <input
+                defaultValue={dataDesk?.start.slice(0, 3) + "15"}
+                type="time"
+                step="900"
+                min={dataDesk?.start.slice(0, 3) + "15"}
+                max={dataDesk?.end}
+                required
+              />
+            </span>
+
+            <button type="submit" className={errReserve ? styles.errButtom : ''}>Reserve</button>
           </form>
+          
           <div className={styles.icon__time}>
             <span>{dataDesk?.start}</span>
             {rooms[indexRoom]?.desks[idDesk].arrTime.map((n, i) => (

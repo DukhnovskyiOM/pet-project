@@ -13,6 +13,7 @@ const Room = () => {
   const indexRoom = rooms?.findIndex((e) => String(e.id) === String(id));
   const name = rooms[indexRoom].name
   const [errReserve, setErrReserve] = React.useState(false);
+  const [sendReserve, setSendReserve] = React.useState(false);
   const [dataDesk, setDataDesk] = React.useState<IDesk | null>(null);
 
   const dispatch = useDispatch();
@@ -47,14 +48,17 @@ const Room = () => {
     let newReserveArr;
     if (reserveArr.some((e) => e < seats)) {
       setErrReserve(true);
+      setSendReserve(false);
     } else if (timeArrLength <= 0) {
       setErrReserve(true);
+      setSendReserve(false);
     } else {
       newReserveArr = reserveArr.map((e) => e - seats);
     }
     if (newReserveArr) {
       if (newReserveArr?.some((e) => e <= -1)) {
         setErrReserve(true);
+        setSendReserve(false);
       } else {
         dispatch(
           reserveDeskToRoom({
@@ -66,6 +70,7 @@ const Room = () => {
           })
         );
         setErrReserve(false);
+        setSendReserve(true);
       }
     }
 
@@ -77,7 +82,7 @@ const Room = () => {
   return (
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
-        <span className={styles.title}>{name}</span>
+        <span className={styles.title}>{`Room name: ${name}`}</span>
         <div className={styles.box}>
           {rooms[indexRoom].desks
             .filter((e) => e.name !== "")
@@ -85,6 +90,7 @@ const Room = () => {
               <Reserve
                 key={i}
                 errReserve={errReserve}
+                sendReserve={sendReserve}
                 desk={desk}
                 dataDesk={dataDesk}
                 setDataDesk={setDataDesk}

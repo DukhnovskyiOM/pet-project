@@ -27,15 +27,13 @@ const CreateRoom: React.FC = () => {
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
         <span className={styles.title}>Create room</span>
-        {!nameRoom ? (
-          <>
-            <div className={styles.list}>name</div>
+        {!nameRoom ? 
             <form onSubmit={createRoomName}>
-              <input name="room" type="text" placeholder="Room-1" required />
+              <input name="room" type="text" placeholder="enter room name :: Room-1" required />
               <button type="submit">Save</button>
             </form>
-          </>
-        ) : (
+          
+         : (
           <>
             <div className={styles.list}>Choice number of tables</div>
             <div className={styles.desk}>
