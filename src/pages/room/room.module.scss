@@ -8,21 +8,54 @@
       margin-top: 25px;
       width: 500px;
       background-color: white;
+      min-height: 80vh;
+      //height: max-content;
+      background-image: url("../../img/room-list.jpg");
+      background-position: center;
+      background-size: cover;
       padding: 40px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       align-items: center;
+      position: relative;
+
+    .back{
+      cursor: pointer;
+      position: absolute;
+      left: 15px;
+      top: 20px;
+      background-color: white;
+      padding: 7px;
+      border-radius: 50px;
+      border: 5px solid white;
+      &:hover{
+        border: 5px solid #87e74f;
+      }
+
+      @media only screen and (max-width: 600px) {
+        position: relative;
+        top: 5px;
+}
+    }
 
     .title {
-      color: #5d5b8d;
-      font-size: 30px;
+      //color: #87e74f;
+      font-size: 40px;
+      max-width: 400px;
+      word-break:break-all;
       margin-bottom: 20px;
       display: block;
       margin-left: auto;
       margin-right: auto;
       font-weight: 700;
+      color: #aff;
+            text-shadow: 
+                5px  5px 10px #045acf,  /*  Нижний - Справа */
+                5px -5px 10px #045acf,  /*  Нижний - Слева  */
+                -5px  5px 10px #045acf,  /* Верхний - Справа */
+                -5px -5px 10px #045acf;  /* Верхний - Слева  */
     }
     
     .box {
@@ -37,39 +70,55 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 2px solid #8758ff;
+      border: 2px solid #87e74f;
       padding: 15px;
       gap: 10px;
 
       .name{
-        font-size: 25px;
+        font-size: 29px;
         color: #5a1ff1;
+        font-weight: 900;
+        text-shadow: 
+                5px  5px 10px #87e74f,  /*  Нижний - Справа */
+                5px -5px 10px #87e74f,  /*  Нижний - Слева  */
+                -5px  5px 10px #87e74f,  /* Верхний - Справа */
+                -5px -5px 10px #87e74f;  /* Верхний - Слева  */
       }
       .err{
         font-size: 20px;
         font-weight: 500;
         color: #ee1010;
+        background-color: white;
+        padding: 7px;
+        border-radius: 50px;
+        border: 2px solid #5a1ff1;
       }
       .send{
         font-size: 20px;
         font-weight: 500;
         color: #4cb60e;
+        background-color: white;
+        padding: 7px;
+        border-radius: 50px;
+        border: 2px solid #5a1ff1;
       }
     }
 
     form {
       display: flex;
+      
       //flex-direction: column;
       gap: 7px;
 
       span{
+        background-color: white;
         font-size: small;
         display: flex;
         align-items: center;
         //justify-content: center;
         //padding-left: 5px;
         color: grey;
-        border: 2px solid #8758ff;
+        border: 2px solid #87e74f;
         padding: 5px;
         input{
             //width: 50px;
@@ -90,6 +139,7 @@
         cursor: pointer;
         position: relative;
         //top: 10px;
+        border: 2px solid #87e74f;
 
         &:hover{
             color: white;
@@ -120,13 +170,21 @@
       font-size: larger;
       font-weight: 500;
       cursor: pointer;
+      border: 2px solid #fff;
 
+      &:hover{
+          border: 2px solid #87e74f;
+      }
     }
   }
 }
 
 
 .icon__time {
+  background-color: white;
+  border-radius: 50px;
+  border: 2px solid #87e74f;
+  font-size: 15px;
   width: 500px;
   display: flex;
   flex-direction: row;
@@ -157,3 +215,4 @@
     }
   }
 }
+

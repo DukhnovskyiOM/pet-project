@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { reducer as deskReducer } from "./room/room.slice";
+import userReducer from "./user/user.slice";
 
 const redusers = combineReducers({
     place: deskReducer,
+    user: userReducer,
 })
 
 export const store = configureStore({

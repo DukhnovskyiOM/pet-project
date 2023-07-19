@@ -11,7 +11,6 @@ export const roomSlice = createSlice({
   initialState,
   reducers: {
     createRoom: (state, { payload }) => {
-      
       const room = {
         id: payload.id,
         name: payload.name,
@@ -25,24 +24,15 @@ export const roomSlice = createSlice({
           })
           .map((el) => ({ ...el, id: uuid() })),
       };
-
-      console.log(state.rooms, "payload");
-
     state.rooms = [...state.rooms, room]
-      
     },
     editDesk: (state, { payload }: PayloadAction<IDesk>) => {
       const index = state.rooms?.findIndex(e => e.name === payload.roomName)
       const indexDesk = state.rooms[index]?.desks.findIndex(e => e.id === payload.id)
-      console.log(indexDesk);
       state.rooms[index].desks[indexDesk] = payload
-
-      
     },
     addNewDesk: (state, { payload }) => {
-      
       const index = state.rooms?.findIndex(e => e.name === payload.roomName)
-
       const desk = {
             name: "",
             id: payload.id,
@@ -53,33 +43,22 @@ export const roomSlice = createSlice({
             arrTime: []
       };
       state.rooms[index].desks = [...state.rooms[index].desks, desk]
-
-      
     },
     deleteDesk: (state, { payload }) => {
-
       const indexRoom = state.rooms?.findIndex(e => e.name === payload.roomName)
       const indexDesk = state.rooms[indexRoom]?.desks.findIndex(e => e.id === payload.idDesk)
-      console.log(payload.idDesk);
- 
       state.rooms[indexRoom].desks.splice(indexDesk, 1)
      },
     delRoom: (state, { payload }) => {
-
      const index = state.rooms?.findIndex(e => e.name === payload.roomName)
-
       state.rooms.splice(index, 1)
     },
     reserveDeskToRoom: (state, { payload }) => {
-      console.log(payload);
-
       const arrTime = [
         ...state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime.slice(0, payload.startIdTime),
         ...payload.newReserveArr,
         ...state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime.slice(payload.endIdTime)
       ]
-console.log(arrTime);
-
       state.rooms[payload.indexRoom].desks[payload.indexDesk].arrTime = arrTime
      },
   },

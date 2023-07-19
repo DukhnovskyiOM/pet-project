@@ -1,3 +1,5 @@
+
+
 .formContainer{
 
     display: flex;
@@ -7,7 +9,7 @@
     .formWrapper{
         
         margin-top: 25px;
-        //width: 500px;
+        max-width: 70vw;
         background-color: white;
         padding: 20px;
         border-radius: 10px;
@@ -15,15 +17,42 @@
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        position: relative;
+
+        .back{
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            background-color: white;
+            padding: 7px;
+            border-radius: 50px;
+            border: 5px solid white;
+            &:hover{
+              border: 5px solid #87e74f;
+            }
+
+            @media only screen and (max-width: 600px) {
+                    position: relative;
+                    top: 5px;
+            }
+          }
 
         .title{
             color: #5d5b8d;
             font-size: 30px;
+            max-width: 400px;
+            word-break:break-all;
             margin-bottom: 20px;
             display: block;
             margin-left: auto;
             margin-right: auto;
             font-weight: 700;
+            text-shadow: 
+                5px  5px 10px #87e74f,  /*  Нижний - Справа */
+                5px -5px 10px #87e74f,  /*  Нижний - Слева  */
+                -5px  5px 10px #87e74f,  /* Верхний - Справа */
+                -5px -5px 10px #87e74f;  /* Верхний - Слева  */
         } 
   
         form{
@@ -36,6 +65,17 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
+
+            .plus{
+                cursor: pointer;
+                transform: scale(0.5);
+                &:hover{
+                    transform: scale(0.7);
+                &:active{
+                    transform: scale(0.5);
+                }
+                }
+            }
         }
     }
 }

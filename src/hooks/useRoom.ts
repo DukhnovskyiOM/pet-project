@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from './useAppSelection';
 export const useRoom = () => {
-    const {place} = useSelector(state => state)
+    const {place} = useAppSelector(state => state)
 
     return {place}
 }

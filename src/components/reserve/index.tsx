@@ -6,11 +6,13 @@ interface props {
   desk: IDesk;
   dataDesk: IDesk | null;
   setDataDesk: React.Dispatch<React.SetStateAction<IDesk | null>>;
-  reserveOneDesk: (e: any) => void;
+  reserveOneDesk: (e: React.FormEvent<HTMLInputElement>) => void;
   rooms: IRooms[];
   indexRoom: number;
   errReserve: boolean;
   sendReserve: boolean;
+  setSendReserve: (e: boolean) => void;
+  setErrReserve: (e: boolean) => void;
 }
 
 const Reserve = ({
@@ -22,6 +24,8 @@ const Reserve = ({
   indexRoom,
   errReserve,
   sendReserve,
+  setSendReserve,
+  setErrReserve,
 }: props) => {
   const [reserve, setReserve] = React.useState(false);
 
@@ -31,6 +35,8 @@ const Reserve = ({
 
   const reserveDesk = (desk: IDesk) => {
     setDataDesk(desk);
+    setSendReserve(false)
+    setErrReserve(false)
   };
 
   React.useEffect(() => {
@@ -52,8 +58,8 @@ const Reserve = ({
         <div className={styles.boxForm}>
             {reserve && <>
               <span className={styles.name}>{`Desk name: ${desk.name}`}</span>
-              <span className={styles.err}>{errReserve && "change time or seats"}</span>
-              <span className={styles.send}>{sendReserve && "Congrats! you reserve desk"}</span>
+              {errReserve && <span className={styles.err}>change time or seats</span>}
+              {sendReserve && <span className={styles.send}>Congrats! you reserve desk</span>}
               </>}
           <form onSubmit={reserveOneDesk}>
             {dataDesk?.seats && (

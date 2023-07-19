@@ -1,0 +1,32 @@
+.navigationBlock{
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    gap: 50px;
+    //background-color: gray;
+    
+}
+
+  .buttonNavigation {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    padding: 5px 20px;
+    margin-top: 25px;
+    width: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 40px 40px #87e74f inset, 0 0 0 0 #87e74f;
+    font-weight: bold;
+    font-size: xx-large;
+    letter-spacing: 3px;
+    color: rgb(6, 4, 102);
+    transition: .15s ease-in-out;
+    cursor: pointer;
+
+    &:hover{
+        box-shadow: 0 0 10px 0 #87e74f inset, 0 0 10px 4px #87e74f;
+        color: #ffffff;  
+    }
+  }

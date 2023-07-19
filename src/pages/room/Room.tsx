@@ -5,10 +5,14 @@ import { useDispatch } from "react-redux";
 import { reserveDeskToRoom } from "../../redux/room/room.slice";
 import { IDesk } from "../../models/model";
 import Reserve from "../../components/reserve";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Back from "../../img/back.png";
+import { Navigation } from "../../components/navigation/Navigation";
+
 
 const Room = () => {
   const {id} = useParams();
+  const navigate = useNavigate()
   const { rooms } = useAppSelector((state) => state.place);
   const indexRoom = rooms?.findIndex((e) => String(e.id) === String(id));
   const name = rooms[indexRoom].name
@@ -19,7 +23,7 @@ const Room = () => {
   const dispatch = useDispatch();
 
 
-  const reserveOneDesk = (e) => {
+  const reserveOneDesk = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const seats = e.target[0].value;
@@ -74,14 +78,15 @@ const Room = () => {
       }
     }
 
-    console.log(newReserveArr);
   };
 
 
-
   return (
+    <>
+    <Navigation />
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
+      <img className={styles.back} width={25} height={25} src={Back} alt="Back" onClick={() => navigate(-1)} />
         <span className={styles.title}>{`Room name: ${name}`}</span>
         <div className={styles.box}>
           {rooms[indexRoom].desks
@@ -89,6 +94,8 @@ const Room = () => {
             .map((desk, i) => (
               <Reserve
                 key={i}
+                setErrReserve={setErrReserve}
+                setSendReserve={setSendReserve}
                 errReserve={errReserve}
                 sendReserve={sendReserve}
                 desk={desk}
@@ -102,6 +109,7 @@ const Room = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

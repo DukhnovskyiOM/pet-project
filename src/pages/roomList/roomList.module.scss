@@ -8,21 +8,47 @@
         margin-top: 25px;
         width: 500px;
         background-color: white;
+        min-height: 80vh;
+        background-image: url("../../img/room-list.jpg");
+        background-position: center;
+        background-size: cover;
         padding: 40px;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        position: relative;
         
         .title{
-            color: #5d5b8d;
-            font-size: 30px;
+            //color: #87e74f;
+            font-size: 40px;
             margin-bottom: 20px;
             display: block;
             margin-left: auto;
             margin-right: auto;
             font-weight: 700;
+            color: #aff;
+            text-shadow: 
+                5px  5px 10px #045acf,  /*  Нижний - Справа */
+                5px -5px 10px #045acf,  /*  Нижний - Слева  */
+                -5px  5px 10px #045acf,  /* Верхний - Справа */
+                -5px -5px 10px #045acf;  /* Верхний - Слева  */
+        }
+
+        .empty{
+            color: #3b56ee;
+            font-size: 25px;
+            margin-top: 150px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 700;
+            text-shadow: 
+                5px  5px 10px #87e74f,  /*  Нижний - Справа */
+                5px -5px 10px #87e74f,  /*  Нижний - Слева  */
+                -5px  5px 10px #87e74f,  /* Верхний - Справа */
+                -5px -5px 10px #87e74f;  /* Верхний - Слева  */
         }
 
         .list{
@@ -37,6 +63,11 @@
             margin-bottom: 1rem;
             font-size: larger;
             font-weight: 500;
+            border: 2px solid #fff;
+
+            &:hover{
+                border: 2px solid #87e74f;
+            }
             .open{
                 cursor: pointer;
             }
