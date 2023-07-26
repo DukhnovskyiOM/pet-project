@@ -1,13 +1,3 @@
-export interface IRooms {
-  id: number;
-  name: string;
-  desks: IDesk[];
-}
-
-export interface IRoomState {
-  rooms: IRooms[];
-}
-
 export interface IDesk {
   id: number;
   name: string;
@@ -17,3 +7,17 @@ export interface IDesk {
   end: string;
   arrTime: number[];
 }
+
+export interface IRooms {
+  id?: number;
+  name: string;
+  email: string | null;
+  desks: IDesk[];
+}
+
+export interface IRoomState {
+  rooms: IRooms[];
+  loading: boolean;
+  error: string | null;
+}
+

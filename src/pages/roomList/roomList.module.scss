@@ -8,10 +8,11 @@
         margin-top: 25px;
         width: 500px;
         background-color: white;
-        min-height: 80vh;
-        background-image: url("../../img/room-list.jpg");
-        background-position: center;
-        background-size: cover;
+        min-height: 70vh;
+        background-image: url("../../img/room-top.jpg"), url("../../img/room-back.jpg");
+        background-position: top;
+        background-size: 90vh, contain;
+        background-repeat: no-repeat, repeat;
         padding: 40px;
         border-radius: 10px;
         display: flex;
@@ -21,7 +22,6 @@
         position: relative;
         
         .title{
-            //color: #87e74f;
             font-size: 40px;
             margin-bottom: 20px;
             display: block;
@@ -34,6 +34,12 @@
                 5px -5px 10px #045acf,  /*  Нижний - Слева  */
                 -5px  5px 10px #045acf,  /* Верхний - Справа */
                 -5px -5px 10px #045acf;  /* Верхний - Слева  */
+        }
+
+        .checkbox{
+            color: #87e74f;
+            font-size: 18px;
+            font-weight: 500;
         }
 
         .empty{
@@ -70,6 +76,7 @@
             }
             .open{
                 cursor: pointer;
+                max-width: 300px;
             }
             svg {
                 margin-left: 0.75rem;
@@ -78,12 +85,6 @@
                     color: #87e74f;
                 }
               }
-
-        
-            // button{
-            //     cursor: pointer;
-            //     margin-left: 5px;
-            // }
         }
     }
 }

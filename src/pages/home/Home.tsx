@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import styles from "./home.module.scss";
 import IconWorkPlace from "../../img/Work-Icon.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, inMemoryPersistence, setPersistence, browserSessionPersistence, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { app } from "../../firebase";
 import { setUser } from "../../redux/user/user.slice";
 import { useAppDispatch } from "../../hooks/useAppSelection";
@@ -18,10 +18,13 @@ const Home = () => {
     const [password, setPassword] = React.useState('')
     const [email, setEmail] = React.useState('')
     const auth = getAuth(app);
-
+  
     const handleLogin = () => {
+
       signInWithEmailAndPassword(auth, email, password)
       .then(({user}) => {
+        console.log(user);
+        
         dispatch(setUser({
           email: user.email,
           token: user.refreshToken,

@@ -8,11 +8,11 @@
       margin-top: 25px;
       width: 500px;
       background-color: white;
-      min-height: 80vh;
-      //height: max-content;
-      background-image: url("../../img/room-list.jpg");
-      background-position: center;
-      background-size: cover;
+      min-height: 70vh;
+      background-image: url("../../img/room-top.jpg"), url("../../img/room-back.jpg");
+      background-position: top;
+      background-size: 90vh, contain;
+      background-repeat: no-repeat, repeat;
       padding: 40px;
       border-radius: 10px;
       display: flex;
@@ -36,16 +36,16 @@
 
       @media only screen and (max-width: 600px) {
         position: relative;
-        top: 5px;
+        top: 0px;
 }
     }
 
     .title {
-      //color: #87e74f;
       font-size: 40px;
       max-width: 400px;
       word-break:break-all;
       margin-bottom: 20px;
+      text-align: center;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -57,6 +57,21 @@
                 -5px  5px 10px #045acf,  /* Верхний - Справа */
                 -5px -5px 10px #045acf;  /* Верхний - Слева  */
     }
+
+    .empty{
+      color: #3b56ee;
+      font-size: 25px;
+      margin-top: 150px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 700;
+      text-shadow: 
+          5px  5px 10px #87e74f,  /*  Нижний - Справа */
+          5px -5px 10px #87e74f,  /*  Нижний - Слева  */
+          -5px  5px 10px #87e74f,  /* Верхний - Справа */
+          -5px -5px 10px #87e74f;  /* Верхний - Слева  */
+  }
     
     .box {
       display: flex;
@@ -106,8 +121,6 @@
 
     form {
       display: flex;
-      
-      //flex-direction: column;
       gap: 7px;
 
       span{
@@ -115,18 +128,14 @@
         font-size: small;
         display: flex;
         align-items: center;
-        //justify-content: center;
-        //padding-left: 5px;
         color: grey;
         border: 2px solid #87e74f;
         padding: 5px;
         input{
-            //width: 50px;
             padding: 3px;
             border: none;
             outline: none;
             background-color: transparent;
-            //font-family: helvetica;
 
         }
       }
@@ -138,15 +147,11 @@
         background-color: #8758ff;
         cursor: pointer;
         position: relative;
-        //top: 10px;
         border: 2px solid #87e74f;
 
         &:hover{
             color: white;
             background-color: #7540fc;
-            //font-size: 25px;
-            //border-color: #8758ff;
-            //border: 1px solid #8758ff;
           }
     }
     .errButtom{

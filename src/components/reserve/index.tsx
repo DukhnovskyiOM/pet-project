@@ -6,7 +6,7 @@ interface props {
   desk: IDesk;
   dataDesk: IDesk | null;
   setDataDesk: React.Dispatch<React.SetStateAction<IDesk | null>>;
-  reserveOneDesk: (e: React.FormEvent<HTMLInputElement>) => void;
+  reserveOneDesk: (e: React.FormEvent<HTMLFormElement>) => void;
   rooms: IRooms[];
   indexRoom: number;
   errReserve: boolean;

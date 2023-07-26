@@ -3,18 +3,18 @@ import styles from "./oneDesk.module.scss";
 import IconWorkPlace from "../../img/Work-Icon.png";
 import AddDesk from "../../img/add-desk.png";
 import { IDesk } from "../../models/model";
-import { useDispatch } from "react-redux";
-import { deleteDesk, editDesk } from "../../redux/room/room.slice";
+import { deleteDesk, editDesk, editRoomApi } from "../../redux/room/room.slice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { useAppDispatch } from "../../hooks/useAppSelection";
 
 interface props {
   data: IDesk;
 }
 
 const OneDesk = ({ data }: props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [save, setSave] = React.useState(false);
 
   const addDesk = (e) => {
@@ -28,7 +28,6 @@ const OneDesk = ({ data }: props) => {
     const arrTime: number[] = new Array(
       ((endTime.slice(0, 2) - startTime.slice(0, 2)) * 60) / 15
     ).fill(Number(numberSeats));
-    console.log(arrTime);
 
     if (startTime.slice(0, 2) > endTime.slice(0, 2)) {
       alert("start time mast be earle then end time");
@@ -47,14 +46,16 @@ const OneDesk = ({ data }: props) => {
       })
     );
     setSave(true);
+    
+    dispatch(editRoomApi(data.roomName))
   };
 
-  const delDesk = (e) => {
+  const delDesk = () => {
     const idDesk = data.id;
     const roomName = data.roomName;
-    console.log(roomName, idDesk);
     dispatch(deleteDesk({ roomName, idDesk }));
     setSave(false);
+    dispatch(editRoomApi(roomName))
   };
 
   return (
@@ -68,7 +69,7 @@ const OneDesk = ({ data }: props) => {
         <FontAwesomeIcon className={styles.edit} icon={faPenToSquare} onClick={() => setSave(false)} />
         </>
         }
-        {data?.seats && <FontAwesomeIcon className={styles.del} icon={faTrash} onClick={delDesk} />}
+        <FontAwesomeIcon className={styles.del} icon={faTrash} onClick={delDesk} />
       </div>
       <div className={styles.wrap__right}>
           <form onSubmit={addDesk}>

@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./room.module.scss";
-import { useAppSelector } from "../../hooks/useAppSelection";
-import { useDispatch } from "react-redux";
-import { reserveDeskToRoom } from "../../redux/room/room.slice";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelection";
+import { editRoomApi, reserveDeskToRoom } from "../../redux/room/room.slice";
 import { IDesk } from "../../models/model";
 import Reserve from "../../components/reserve";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,8 +19,8 @@ const Room = () => {
   const [sendReserve, setSendReserve] = React.useState(false);
   const [dataDesk, setDataDesk] = React.useState<IDesk | null>(null);
 
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
+  
 
   const reserveOneDesk = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -75,6 +74,7 @@ const Room = () => {
         );
         setErrReserve(false);
         setSendReserve(true);
+        dispatch(editRoomApi(dataDesk?.roomName))
       }
     }
 
@@ -87,7 +87,7 @@ const Room = () => {
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
       <img className={styles.back} width={25} height={25} src={Back} alt="Back" onClick={() => navigate(-1)} />
-        <span className={styles.title}>{`Room name: ${name}`}</span>
+        <span className={styles.title}>Room name: <br/>{name}</span>
         <div className={styles.box}>
           {rooms[indexRoom].desks
             .filter((e) => e.name !== "")
@@ -107,6 +107,7 @@ const Room = () => {
               />
             ))}
         </div>
+        {!rooms[indexRoom].desks.length && <span className={styles.empty}>Empty</span>}
       </div>
     </div>
     </>
