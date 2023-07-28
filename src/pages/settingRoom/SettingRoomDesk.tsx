@@ -16,14 +16,15 @@ const SettingRoomDesk = () => {
   const {id} = useParams()
   const [idRoom, setIdRoom] = React.useState(NaN)
   const [roomName, setRoomName] = React.useState('')
+
   
 
   React.useEffect(() => {
     const roomId = rooms?.findIndex((e) => String(e.id) === String(id)) 
-    const name = rooms[roomId].name
+    const name = rooms[roomId]?.name
     setIdRoom(roomId);
     setRoomName(name)
-  }, [id, rooms])
+  }, [id, rooms, navigate])
 
   const addDesk = () => {
     const id = uuid();

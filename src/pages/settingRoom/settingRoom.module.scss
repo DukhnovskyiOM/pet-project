@@ -9,10 +9,10 @@
     .formWrapper{
         
         margin-top: 25px;
-        max-width: 70vw;
+        max-width: 60vw;
         background-image: url("../../img/room-back.jpg");
         background-position: center;
-        background-size: cover;
+        background-size: contain;
         padding: 20px;
         border-radius: 10px;
         display: flex;

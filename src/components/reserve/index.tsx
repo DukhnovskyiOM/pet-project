@@ -26,8 +26,10 @@ const Reserve = ({
   sendReserve,
   setSendReserve,
   setErrReserve,
+  setModalActive,
 }: props) => {
   const [reserve, setReserve] = React.useState(false);
+
 
   const idDesk = rooms[indexRoom]?.desks.findIndex(
     (e) => e.id === dataDesk?.id
@@ -47,6 +49,7 @@ const Reserve = ({
     }
   }, [desk, dataDesk]);
 
+
   return (
     <>
       {!reserve && (
@@ -59,7 +62,7 @@ const Reserve = ({
             {reserve && <>
               <span className={styles.name}>{`Desk name: ${desk.name}`}</span>
               {errReserve && <span className={styles.err}>change time or seats</span>}
-              {sendReserve && <span className={styles.send}>Congrats! you reserve desk</span>}
+              {sendReserve && <div className={styles.send}>Congrats! <span className={styles.send_email} onClick={() => setModalActive(true)}>send info</span></div>}
               </>}
           <form onSubmit={reserveOneDesk}>
             {dataDesk?.seats && (
@@ -118,9 +121,11 @@ const Reserve = ({
               </div>
             ))}
             <span>{dataDesk?.end}</span>
+
           </div>
         </div>
       )}
+
     </>
   );
 };

@@ -1,3 +1,55 @@
+.form_sing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+
+  .formOne{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    input{
+      height: 40px;
+      width: 220px;
+      font-size: 15px;
+      color: #8d8d8d;
+      outline: none;
+      padding: 0 10px;
+      border: 1px solid #e74f4f;
+      border-radius: 4px;
+      text-transform: uppercase;
+      &:focus{
+          border-color: #87e74f;
+      }
+      &:valid{
+        border-color: #87e74f;
+      }
+    }
+
+    .reg_button {
+      margin-top: -10px;
+      position: relative;
+      border: none;
+      color: blue;
+      background: transparent;
+      font-size: 48px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.5s;
+  
+      &:hover{
+        color: #87e74f;
+  
+      }
+    }
+  }
+  
+
+  
+}
+
+
 .formContainer{
 
   display: flex;
@@ -8,11 +60,12 @@
       margin-top: 25px;
       width: 500px;
       background-color: white;
-      min-height: 70vh;
-      background-image: url("../../img/room-top.jpg"), url("../../img/room-back.jpg");
+      min-height: 50vh;
+      max-height: 70vh;
+      background-image: url("../../img/room-back.jpg");
       background-position: top;
-      background-size: 90vh, contain;
-      background-repeat: no-repeat, repeat;
+      background-size: 100%;
+      background-repeat: repeat;
       padding: 40px;
       border-radius: 10px;
       display: flex;
@@ -74,50 +127,84 @@
   }
     
     .box {
+      overflow: auto;
+      align-items: center;
+      width: 113%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .boxForm{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #87e74f;
-      padding: 15px;
       gap: 10px;
 
-      .name{
-        font-size: 29px;
-        color: #5a1ff1;
-        font-weight: 900;
-        text-shadow: 
-                5px  5px 10px #87e74f,  /*  Нижний - Справа */
-                5px -5px 10px #87e74f,  /*  Нижний - Слева  */
-                -5px  5px 10px #87e74f,  /* Верхний - Справа */
-                -5px -5px 10px #87e74f;  /* Верхний - Слева  */
-      }
-      .err{
-        font-size: 20px;
-        font-weight: 500;
-        color: #ee1010;
-        background-color: white;
-        padding: 7px;
-        border-radius: 50px;
-        border: 2px solid #5a1ff1;
-      }
-      .send{
-        font-size: 20px;
-        font-weight: 500;
-        color: #4cb60e;
-        background-color: white;
-        padding: 7px;
-        border-radius: 50px;
-        border: 2px solid #5a1ff1;
-      }
+        &::-webkit-scrollbar{
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+            background-color: #f9f9fd;
+            border-radius: 10px;
+          }
+          
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: linear-gradient(180deg, #5d5b8d, #ddddf7);
+          }
+
+
+          .boxForm{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #87e74f;
+            padding: 15px;
+            gap: 10px;
+      
+            .name{
+              font-size: 29px;
+              color: #5a1ff1;
+              font-weight: 900;
+              text-shadow: 
+                      5px  5px 10px #87e74f,  /*  Нижний - Справа */
+                      5px -5px 10px #87e74f,  /*  Нижний - Слева  */
+                      -5px  5px 10px #87e74f,  /* Верхний - Справа */
+                      -5px -5px 10px #87e74f;  /* Верхний - Слева  */
+            }
+            .err{
+              font-size: 20px;
+              font-weight: 500;
+              color: #ee1010;
+              background-color: white;
+              padding: 7px;
+              border-radius: 50px;
+              border: 2px solid #5a1ff1;
+            }
+            .send{
+              font-size: 20px;
+              font-weight: 500;
+              color: #4cb60e;
+              background-color: white;
+              padding: 7px;
+              border-radius: 50px;
+              border: 2px solid #5a1ff1;
+              align-items: center;
+              justify-content: center;
+              display: flex;
+              gap: 25px;
+      
+              .send_email{
+                cursor: pointer;
+                color: #4cb60e;
+                font-size: 17px;
+                &:hover{
+                  color: #045acf;
+                }
+              }
+            }
+          }
+
+
+
     }
+
 
     form {
       display: flex;

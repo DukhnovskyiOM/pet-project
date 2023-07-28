@@ -45,7 +45,6 @@ export const editRoomApi = createAsyncThunk<IRooms, string | undefined, {rejectV
     
     try {
       const response = await axios.put(`https://64a7df50dca581464b84ecc6.mockapi.io/rooms/${room?.id}`, room);
-      
       return (await response.data) as IRooms
     } catch (error) {
       return rejectWithValue('Put Rooms Api')

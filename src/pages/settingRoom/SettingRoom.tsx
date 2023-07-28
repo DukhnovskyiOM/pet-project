@@ -18,6 +18,8 @@ const SettingRoom: React.FC = () => {
   const location = useLocation();
   const idRoom = rooms?.findIndex(e => e.name === location?.state?.name)
 
+ 
+
   const addDesk = (roomName: string) => {
     const id = uuid();
     dispatch(addNewDesk({ roomName, id }));

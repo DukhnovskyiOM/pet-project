@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./oneDesk.module.scss";
 import IconWorkPlace from "../../img/Work-Icon.png";
 import AddDesk from "../../img/add-desk.png";
@@ -58,10 +58,16 @@ const OneDesk = ({ data }: props) => {
     dispatch(editRoomApi(roomName))
   };
 
+  useEffect(() => {
+    if(data?.name){
+      setSave(true);
+    }
+  }, [data?.name])
+
   return (
     <div className={styles.wrapperDesk}>
       <div className={styles.wrap__left}>
-        {!save ? 
+        {!data?.name ? 
         <img width={70} height={70} src={IconWorkPlace} alt="Workplace" /> 
         : 
         <>

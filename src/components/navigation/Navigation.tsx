@@ -10,7 +10,7 @@ export function Navigation() {
     const auth = getAuth();
     const dispatch = useAppDispatch()
     const {isAuth} = useAuth()
-    const check = isAuth ? '/create' : '/'
+    const check = isAuth ? '/create' : '/';
 
     return (
         <nav className={styles.navigationBlock}>

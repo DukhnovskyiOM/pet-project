@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./room.module.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppSelection";
 import { editRoomApi, reserveDeskToRoom } from "../../redux/room/room.slice";
@@ -7,6 +7,8 @@ import Reserve from "../../components/reserve";
 import { useNavigate, useParams } from "react-router-dom";
 import Back from "../../img/back.png";
 import { Navigation } from "../../components/navigation/Navigation";
+import Modal from "../../components/modal/Modal";
+import emailjs from '@emailjs/browser';
 
 
 const Room = () => {
@@ -14,12 +16,14 @@ const Room = () => {
   const navigate = useNavigate()
   const { rooms } = useAppSelector((state) => state.place);
   const indexRoom = rooms?.findIndex((e) => String(e.id) === String(id));
-  const name = rooms[indexRoom].name
+  const name = rooms[indexRoom]?.name
   const [errReserve, setErrReserve] = React.useState(false);
   const [sendReserve, setSendReserve] = React.useState(false);
   const [dataDesk, setDataDesk] = React.useState<IDesk | null>(null);
-
+  const form = useRef();
   const dispatch = useAppDispatch();
+  const [modalActive, setModalActive] = React.useState(false)
+  const [message, setMessage] = React.useState('')
   
 
   const reserveOneDesk = (e: React.FormEvent<HTMLInputElement>) => {
@@ -43,6 +47,14 @@ const Room = () => {
     const indexDesk = rooms[indexRoom]?.desks.findIndex(
       (e) => e.id === dataDesk?.id
     );
+
+    const nameDesk = rooms[indexRoom]?.desks.find(
+      (e) => e.id === dataDesk?.id
+    );
+
+    const val = `You have booked ${seats} seats, start ${startTime} end ${endTime} in room ${dataDesk?.roomName} at the table ${nameDesk?.name}`
+    
+    setMessage(val)
 
     const newTimeArr = rooms[indexRoom].desks[indexDesk].arrTime;
 
@@ -80,16 +92,38 @@ const Room = () => {
 
   };
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, form.current, import.meta.env.VITE_PUBLIC_KEY)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    e.target.reset()
+    setModalActive(false)
+  };
+
 
   return (
     <>
+        <Modal active={modalActive} setActive={setModalActive}>
+              <div className={styles.form_sing}>
+                <form className={styles.formOne} ref={form} onSubmit={sendEmail}>
+                  <input type="email" placeholder="EMAIL" name="user_email" required/>
+                  <textarea style={{display: 'none'}} name="message" value={message} readOnly />
+                  <button type="submit" className={styles.reg_button}>SEND</button>
+                </form>
+              </div>
+        </Modal>
     <Navigation />
     <div className={styles.formContainer}>
       <div className={styles.formWrapper}>
       <img className={styles.back} width={25} height={25} src={Back} alt="Back" onClick={() => navigate(-1)} />
         <span className={styles.title}>Room name: <br/>{name}</span>
         <div className={styles.box}>
-          {rooms[indexRoom].desks
+          {rooms[indexRoom]?.desks
             .filter((e) => e.name !== "")
             .map((desk, i) => (
               <Reserve
@@ -102,12 +136,14 @@ const Room = () => {
                 dataDesk={dataDesk}
                 setDataDesk={setDataDesk}
                 reserveOneDesk={reserveOneDesk}
+                setModalActive={setModalActive}
                 rooms={rooms}
                 indexRoom={indexRoom}
               />
             ))}
         </div>
         {!rooms[indexRoom].desks.length && <span className={styles.empty}>Empty</span>}
+
       </div>
     </div>
     </>

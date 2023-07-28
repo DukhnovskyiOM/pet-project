@@ -31,7 +31,7 @@ const RoomList = () => {
         <div className={styles.checkbox}>
           <label><input type="checkbox" defaultChecked={userRoom} onClick={() => setUserRoom(!userRoom)} /> Only my room ({email})</label>
         </div>
-        }
+        }<div className={styles.list_wrapp}>
         {userRoom ? 
         rooms.filter(e => e.email === email).map((room, i) => (
           <div key={i} className={styles.list} >
@@ -49,6 +49,7 @@ const RoomList = () => {
           </div>
         ))
         }
+        </div>
         </>
         :
         <span className={styles.empty}>Empty</span>
